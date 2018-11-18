@@ -1,6 +1,6 @@
 <template>
-  <div id="columns">
-    <span>{{name}}</span>
+  <div class="columns">
+    <span class="name">{{name}}</span>
     <div  
       v-for="topic in topics"
       :key="topic.id"
@@ -52,7 +52,7 @@ export default {
 </script>
 
 <style scoped>
-#columns {
+.columns {
   display: flex;
   flex-direction: row;
 }
@@ -65,5 +65,9 @@ export default {
   text-align: center;
   border: black 1px solid;
   box-sizing: border-box;
+}
+
+.name {
+  width: 64px;
 }
 </style>
