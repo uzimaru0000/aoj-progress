@@ -3,5 +3,15 @@
 ## description
 Show AizuOnlineJudge proggress view like GitHub contribution.
 
-## run devserver
+## Init
+`$ npm i`
+
+## development
+client
+`$ npm run client`
+
+server
+`$ npm run server`
+
+## run
 `$ npm start`
