@@ -1,6 +1,7 @@
 <template>
   <div class="columns">
     <span class="name">{{name}}</span>
+    <span class="name">{{ Math.floor(progress) }}%</span>
     <div  
       v-for="topic in topics"
       :key="topic.id"
@@ -26,7 +27,8 @@ export default {
   data() {
     return {
       name: "",
-      topics: []
+      topics: [],
+      progress: 0
     };
   },
   methods: {
@@ -45,6 +47,7 @@ export default {
       .then(data => {
         this.name = data.course.shortName;
         this.topics = data.course.topics;
+        this.progress = data.course.progress;
       })
       .catch(err => console.error(err));
   }
@@ -55,15 +58,15 @@ export default {
 .columns {
   display: flex;
   flex-direction: row;
+  width: 640px;
 }
 
 .grass {
-  width: 16px;
+  flex: 1;
   height: 16px;
-  margin: 1px;
+  margin: 1px 1.5px;
   color: white;
   text-align: center;
-  border: black 1px solid;
   box-sizing: border-box;
 }
 

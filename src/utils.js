@@ -2,7 +2,7 @@ export const calcGrassColor = progress => {
     const baseColor = {
         h: 120,
         s: 0,
-        v: 1
+        v: 0.95
     };
 
     const targetColor = {
@@ -22,13 +22,6 @@ export const calcGrassColor = progress => {
 };
 
 export const hsvToRGB = hsv => {
-    if (hsv.s === 0) {
-        return {
-            r: 255,
-            g: 255,
-            b: 255
-        }
-    }
     const c = hsv.v * hsv.s;
     const h = hsv.h / 60.0;
     const x = c * (1 - Math.abs(h % 2 - 1));
