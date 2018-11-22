@@ -55,10 +55,11 @@ export default {
 .columns {
   display: flex;
   flex-direction: row;
+  width: 640px;
 }
 
 .grass {
-  width: 16px;
+  flex: 1;
   height: 16px;
   margin: 1px;
   color: white;
