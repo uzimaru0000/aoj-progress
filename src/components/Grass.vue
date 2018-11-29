@@ -2,25 +2,25 @@
   <div class="columns">
     <span class="name">{{name}}</span>
     <span class="name">{{ Math.floor(progress) }}%</span>
-    <div  
-      v-for="topic in topics"
-      :key="topic.id"
-      class="grass"
-      :style="{
-        background: calcGrassColor(topic.progress)
-      }"
-    >
-    <span v-if="topic.progress === 100">!</span>
+    <div v-for="topic in topics" :key="topic.id" class="topic">
+      <problem
+        v-for="problem in topic.problems"
+        :key="problem.id"
+        v-bind:problem="problem"
+        v-bind:url="genProblemURL(topic, problem)"
+      ></problem>
     </div>
   </div>
 </template>
 
 <script>
 import * as utils from "../utils";
+import Problem from "./Problem";
 
 const endpoint = "http://localhost:5000";
 
 export default {
+  components: { Problem },
   props: {
     courseData: Object
   },
@@ -32,13 +32,12 @@ export default {
     };
   },
   methods: {
-    calcGrassColor(progress) {
-      const hsv = utils.calcGrassColor(progress);
-      const rgb = utils.hsvToRGB(hsv);
-      return utils.rgbToString(rgb);
+    genProblemURL(topic, problem) {
+      return utils.genURL(this.courseData.id, this.name, topic.id, problem.id);
     }
   },
   created() {
+    console.log(this.courseData);
     fetch(`${endpoint}/courses/${this.courseData.id}`, {
       mode: "cors",
       credentials: "include"
@@ -58,16 +57,14 @@ export default {
 .columns {
   display: flex;
   flex-direction: row;
-  width: 640px;
+  width: 980px;
 }
 
-.grass {
+.topic {
+  display: flex;
+  flex-direction: row;
   flex: 1;
-  height: 16px;
-  margin: 1px 1.5px;
-  color: white;
-  text-align: center;
-  box-sizing: border-box;
+  border: 1px solid gray;
 }
 
 .name {

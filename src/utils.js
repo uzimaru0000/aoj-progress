@@ -6,7 +6,7 @@ export const calcGrassColor = progress => {
     };
 
     const targetColor = {
-        h: 130,
+        h: 120,
         s: 0.6,
         v: 0.5
     };
@@ -49,4 +49,9 @@ export const hsvToRGB = hsv => {
 
 export const rgbToString = rgb => {
     return `rgb(${rgb.r}, ${rgb.g}, ${rgb.b})`
+};
+
+export const genURL = (courseID, shortName, topicID, problemID) => {
+    const base = "https://onlinejudge.u-aizu.ac.jp/courses/lesson";
+    return `${base}/${courseID}/${shortName}/${topicID}/${problemID}`;
 };
