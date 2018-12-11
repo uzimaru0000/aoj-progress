@@ -2,25 +2,19 @@
   <div class="columns">
     <span class="name">{{name}}</span>
     <span class="name">{{ Math.floor(progress) }}%</span>
-    <div v-for="topic in topics" :key="topic.id" class="topic">
-      <problem
-        v-for="problem in topic.problems"
-        :key="problem.id"
-        v-bind:problem="problem"
-        v-bind:url="genProblemURL(topic, problem)"
-      ></problem>
-    </div>
+    <topic v-for="topic in topics" :key="topic.id" v-bind:topic="topic"></topic>
   </div>
 </template>
 
 <script>
 import * as utils from "../utils";
 import Problem from "./Problem";
+import Topic from "./Topic";
 
 const endpoint = "http://localhost:5000";
 
 export default {
-  components: { Problem },
+  components: { Topic },
   props: {
     courseData: Object
   },
@@ -38,17 +32,9 @@ export default {
   },
   created() {
     console.log(this.courseData);
-    fetch(`${endpoint}/courses/${this.courseData.id}`, {
-      mode: "cors",
-      credentials: "include"
-    })
-      .then(res => res.json())
-      .then(data => {
-        this.name = data.course.shortName;
-        this.topics = data.course.topics;
-        this.progress = data.course.progress;
-      })
-      .catch(err => console.error(err));
+    this.name = this.courseData.shortName;
+    this.topics = this.courseData.topics;
+    this.progress = this.courseData.progress;
   }
 };
 </script>
