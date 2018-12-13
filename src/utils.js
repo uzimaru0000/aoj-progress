@@ -51,7 +51,7 @@ export const rgbToString = rgb => {
     return `rgb(${rgb.r}, ${rgb.g}, ${rgb.b})`
 };
 
-export const genURL = (courseID, shortName, topicID, problemID) => {
+export const genURL = (courseID, shortName, topicID) => {
     const base = "https://onlinejudge.u-aizu.ac.jp/courses/lesson";
-    return `${base}/${courseID}/${shortName}/${topicID}/${problemID}`;
+    return `${base}/${courseID}/${shortName}/${topicID}`;
 };

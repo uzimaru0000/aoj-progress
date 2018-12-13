@@ -6,20 +6,33 @@
     }"
     @mouseover="toggleMouseOver(true)"
     @mouseleave="toggleMouseOver(false)"
-  ></div>
+  >
+    <hover v-if="flag" :name="topic.shortName" :url="url"></hover>
+  </div>
 </template>
 
 <script>
 import * as utils from "../utils";
+import Hover from "./Hover";
 
 export default {
+  components: {
+    Hover
+  },
   props: {
-    topic: Object
+    topic: Object,
+    shortName: String,
+    id: Number
   },
   data() {
     return {
       flag: false
     };
+  },
+  computed: {
+    url() {
+      return utils.genURL(this.id, this.shortName, this.id);
+    }
   },
   methods: {
     calcGrassColor(progress) {
